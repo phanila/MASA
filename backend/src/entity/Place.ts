@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { Length} from 'class-validator';
 import { Meeting } from './Meeting';
 
@@ -22,4 +22,7 @@ export class Place {
 
     @OneToMany(()=>Meeting, (meeting)=>meeting.place)
     meetings: Meeting[];
+
+    @Column()
+    howManyRatings: number;
 }
