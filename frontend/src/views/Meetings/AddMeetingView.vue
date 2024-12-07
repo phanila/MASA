@@ -67,7 +67,7 @@ const onClick = (evt) => {
   console.log('Marker set at:', marker.value)
 }
 
-const addMeeting = () => {
+const addMeeting = async () => {
   meeting.value.place = {
     lat: marker.value[0],
     lon: marker.value[1],
