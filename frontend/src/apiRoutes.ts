@@ -7,3 +7,5 @@ export abstract class Route {
   response: never;
   isProtected: boolean;
 }
+
+

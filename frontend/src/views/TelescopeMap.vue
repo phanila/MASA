@@ -1,31 +1,78 @@
 <template>
-  <div class="wrapper">
-    <main>
-      <l-map class="map" ref="map" v-model:zoom="zoom" v-model:center="center" :useGlobalLeaflet="false">
-        <l-tile-layer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                      layer-type="base"
-                      name="Stadia Maps Basemap"></l-tile-layer>
-      </l-map>
-    </main>
+
+  <div class="map-container">
+    <l-map class="map" ref="map" v-model:zoom="zoom" v-model:center="center" :useGlobalLeaflet="false">
+      <l-tile-layer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        layer-type="base"
+        name="Stadia Maps Basemap"
+      ></l-tile-layer>
+      <!-- Znacznik dla Warszawy -->
+      <l-marker :lat-lng="[52.2298, 21.0118]">
+        <l-popup>Warszawa</l-popup>
+      </l-marker>
+    </l-map>
   </div>
+
+  <div class="dropdown-container">
+    <v-autocomplete
+      v-model="selectedLocation"
+      :items="locations"
+      label="Search location"
+      placeholder="Enter your city"
+      outlined
+      dense
+      clearable
+      @update:model-value="updateMapCenter"
+    ></v-autocomplete>
+  </div>
+
 </template>
 
 <script lang="ts" setup>
 import "leaflet/dist/leaflet.css"
-import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet"
+import {LMap, LMarker, LPopup, LTileLayer} from "@vue-leaflet/vue-leaflet"
 import { ref } from 'vue'
 
 const zoom = ref(6)
 const center = ref([52.2298, 21.0118])
+
+
+// Lista lokalizacji
+const locations = [
+  { title: "Warszawa", coords: [52.2298, 21.0118] },
+  { title: "Kraków", coords: [50.0647, 19.945] },
+  { title: "Wrocław", coords: [51.1079, 17.0385] },
+  { title: "Gdańsk", coords: [54.352, 18.6466] },
+  { title: "Poznań", coords: [52.4064, 16.9252] },
+];
+
+const selectedLocation = ref(null);
+// Aktualizacja mapy
+const updateMapCenter = (newValue: any) => {
+  const location = locations.find((loc) => loc.title === newValue);
+  if (location) {
+    center.value = location.coords;
+    zoom.value*=2;
+  }
+  else {
+    zoom.value = 6;
+    center.value = [52.2298, 21.0118];
+  }
+
+};
+
 </script>
 
 <style scoped>
-main{
-  height: 100%;
-  width: 100%;
+.dropdown-container{
+  width: 25%;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.wrapper{
+.map-container{
   height: 100%;
   width: 50%;
   position: absolute;
