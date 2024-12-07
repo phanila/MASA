@@ -32,11 +32,46 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
+
+		<!-- Spring Boot Starter Web (includes Spring MVC for REST APIs) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Spring Boot Starter Data JPA (includes Jakarta JPA support) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- Jakarta Persistence API (for JPA - replaces javax.persistence) -->
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<version>2.2.3</version>  <!-- Use latest version -->
+		</dependency>
+
+		<!-- Jakarta Validation API (for JSR 303/JSR 380, replaces javax.validation) -->
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>2.0.2</version>  <!-- Use latest version -->
+		</dependency>
+
+		<!-- Jakarta Servlet API (replaces javax.servlet) -->
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+
+		<!-- Spring Boot Starter Security (for handling authentication, etc.) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<dependency>
@@ -55,6 +90,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.12.6</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
