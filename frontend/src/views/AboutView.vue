@@ -16,7 +16,7 @@ import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet"
 import { ref } from 'vue'
 
 const zoom = ref(6)
-const center = ref([38, 139.69])
+const center = ref([52, 21])
 </script>
 
 <style scoped>

@@ -7,6 +7,7 @@ import App from './App.vue'
 import router from './router'
 import { createVuetify } from 'vuetify'
 import { components, directives } from 'vuetify/dist/vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 const app = createApp(App)
 const vuetify = createVuetify({
