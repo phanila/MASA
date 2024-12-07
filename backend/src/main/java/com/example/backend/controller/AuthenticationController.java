@@ -5,6 +5,7 @@ import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,6 +31,17 @@ public class AuthenticationController {
         } else {
             throw new RuntimeException("Invalid credentials");
         }
+    }
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        // Check if the username already exists
+        if (userRepository.findByUsername(user.getLogin()).isPresent()) {
+            return ResponseEntity.badRequest().body("Username already exists.");
+        }
+
+        // Save the new user
+        userRepository.save(user);
+        return ResponseEntity.ok("User registered successfully.");
     }
 }
 
