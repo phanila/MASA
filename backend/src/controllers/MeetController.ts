@@ -10,18 +10,14 @@ import { Equipment } from '../entity/Equipment';
 
 export class MeetController {
     static create = async (req: Request, res: Response) => {
-        const { userId, name, desc, date, time, } = req.body;
-        const userRepository = AppDataSource.getRepository(User);
+        const { userId, name, desc, date, time, equipment} = req.body;
+        const meetRepository = AppDataSource.getRepository(Meeting);
 
         try {
-            const existingUser = await userRepository.findOne({ where: { email } });
-            if (existingUser) return res.status(400).json({ message: 'User already exists' });
+            const meeting = meetRepository.create({ name, desc, date, time, equipment });
+            await meetRepository.save(meeting);
 
-            const hashedPassword = await bcrypt.hash(password, 10);
-            const user = userRepository.create({ email, password: hashedPassword });
-            await userRepository.save(user);
-
-            res.status(201).json({ message: 'User created' });
+            res.status(201).json({ message: 'Meeting created' });
         } catch (error) {
             res.status(500).json({ message: 'Internal server error' });
         }
