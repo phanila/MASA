@@ -11,13 +11,19 @@
       <l-marker
           v-for="meeting in meetings"
           :key="meeting.id"
-          :lat-lng="[meeting.lat, meeting.lon]"
+          :lat-lng="[meeting.place.lat, meeting.place.lon]"
       >
+        <template #tooltip>
+          <span>miejsce: {{meeting.place}}</span>
+          <span>data: {{meeting.date}}</span>
+        </template>
         <template #popup>
           <div>
-            <h3>{{ meeting.title }}</h3>
-            <p>{{ meeting.description }}</p>
-            <p><strong>Data:</strong> {{ meeting.date }} {{ meeting.time }}</p>
+            <h3>{{ meeting.place }}</h3>
+            <p><strong>kiedy? {{meeting.date }}, godzina {{meeting.time}}</strong>></p>
+            <p>zainteresowani: {{meeting.interestedCount}}</p>
+            <p>sprzęt: {{meeting.equipment}}</p>
+            <p>warunki do obserwacji: {{meeting.ratingOfWeather}}</p>
           </div>
         </template>
       </l-marker>
@@ -108,5 +114,19 @@ const updateMapCenter = (newValue: any) => {
   position: absolute;
   right: 0;
 }
+
+.leaflet-tooltip {
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.leaflet-popup-content {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
 
 </style>
