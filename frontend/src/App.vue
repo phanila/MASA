@@ -1,28 +1,31 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { navbarLinks } from '@/router/navbarLinks.ts'
 </script>
 
 <template>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-      <RouterLink to="/example">Example</RouterLink>
-      <RouterLink to="/login">Login</RouterLink>
-      <RouterLink to="/map">Telescope Map</RouterLink>
-    </nav>
+  <v-toolbar>
+    <v-toolbar-title>Duży teleskop w twojej okolicy</v-toolbar-title>
+    <v-toolbar-items>
+      <v-btn v-for="link in navbarLinks" :key="link.path">
+        <RouterLink :to="link.path">{{ link.title }}</RouterLink>
+      </v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
 
   <RouterView />
 </template>
-<style scoped>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
+  height: 150px;
   background-color: #333;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-around;
 }
 
 </style>

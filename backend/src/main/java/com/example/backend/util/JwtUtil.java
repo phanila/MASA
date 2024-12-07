@@ -22,7 +22,7 @@ public class JwtUtil {
     public String extractUsername(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey)
-                .parseClaimsJws(token)
+                .build().parseSignedClaims(token)
                 .getBody()
                 .getSubject();
     }
@@ -34,7 +34,7 @@ public class JwtUtil {
     public Date extractExpirationDate(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey)
-                .parseClaimsJws(token)
+                .build().parseSignedClaims(token)
                 .getBody()
                 .getExpiration();
     }
