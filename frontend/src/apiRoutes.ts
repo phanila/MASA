@@ -17,12 +17,12 @@ export abstract class Route {
 export type Meeting = {
   id: number;
   place: Place;
+  name: string;
+  description: string;
   interestedCount: number;
   equipment: string;
   ratingOfWeather: number;
   date: string;
-  time: string;
-
 }
 
 export type Place = {
@@ -41,6 +41,16 @@ export class GetMeetingsRoute extends Route {
   constructor() {
     super(ApiMethod.GET, '/meetings', true);
     this.response = {meetings: []}
+  }
+}
+
+export class AddMeetingRoute extends Route {
+  data: {
+    meeting: Meeting
+  }
+  response: never;
+  constructor() {
+    super(ApiMethod.POST, '/meetings/add', true);
   }
 }
 
