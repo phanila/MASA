@@ -11,5 +11,6 @@ router.post('/change-password', authMiddleware, AuthController.changePassword);
 router.get('/protected', authMiddleware, (req, res) => res.json({ message: 'This is a protected route' }));
 
 router.post('/place-create', PlaceController.create);
+router.patch('/place-rate', PlaceController.ratePlace);
 
 export default router;
