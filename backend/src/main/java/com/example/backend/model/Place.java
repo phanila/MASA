@@ -23,7 +23,7 @@ public class Place {
     }
 
     public Place getPlaces() {
-
+        return this;
     }
 
     private boolean calculateDistance(Place other, int deseiredDistance) {
