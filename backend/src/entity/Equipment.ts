@@ -1,21 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Length } from 'class-validator';
+import { User } from './User';
 
 @Entity()
-export class Place {
+export class Equipment {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    @Length(6, 20)
+    @Length(3, 100)
     name: string;
 
-    @Column()
-    latitude: number;
+    @ManyToOne(()=>User, (user)=>user.equipment)
+    user: User;
 
-    @Column()
-    longitude: number;
-
-    @Column()
-    rating: number;
 }
