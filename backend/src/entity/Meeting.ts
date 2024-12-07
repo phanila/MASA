@@ -11,6 +11,9 @@ export class Meeting {
     @Column()
     name: string;
 
+    @Column()
+    desc: string;
+
     @ManyToOne(()=>Place, (place)=>place.meetings)
     place: Place;
 

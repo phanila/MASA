@@ -10,7 +10,7 @@ import { Equipment } from '../entity/Equipment';
 
 export class MeetController {
     static create = async (req: Request, res: Response) => {
-        const { userId, name,  } = req.body;
+        const { userId, name, desc, date, time, } = req.body;
         const userRepository = AppDataSource.getRepository(User);
 
         try {
