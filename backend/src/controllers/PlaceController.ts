@@ -17,6 +17,7 @@ export class PlaceController {
            // const place = new Place();
             const place = placeRepository.create({name, latitude, longitude});
             place.rating = -1;
+            place.howManyRatings = 0;
             await placeRepository.save(place);
             res.status(201).json({ message: 'Place created' });
 
@@ -39,14 +40,19 @@ export class PlaceController {
             if (!place) {
                 return res.status(404).json({ message: 'Place not found' });
             }
+            if (place.howManyRatings === 0) {
+                // If no ratings exist, just set the rating to the new value
+                place.rating = rating;
+            } else {
+                // count average
+                const totalRatings = place.rating * place.howManyRatings;
+                const newTotalRatings = totalRatings + rating;
+                place.howManyRatings += 1;
+                place.rating = newTotalRatings / place.howManyRatings;
+            }
 
-            // Update the rating of the place
-            place.rating = rating;
-
-            // Save the updated place
             await placeRepository.save(place);
 
-            // Respond with the updated place
             res.status(200).json({ message: 'Place rated successfully', place });
 
         } catch (error) {

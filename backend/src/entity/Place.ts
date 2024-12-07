@@ -18,4 +18,7 @@ export class Place {
 
     @Column()
     rating: number;
+
+    @Column()
+    howManyRatings: number;
 }
