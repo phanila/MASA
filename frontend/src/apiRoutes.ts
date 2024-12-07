@@ -6,23 +6,41 @@ export abstract class Route {
   data: never;
   response: never;
   isProtected: boolean;
+
+  constructor(type: ApiMethod, url: string, isProtected: boolean) {
+    this.type = type;
+    this.url = url;
+    this.isProtected = isProtected;
+  }
 }
 
-export class GetMeetingsRoute extends Route{
+export type Meeting = {
+  id: number;
+  place: Place;
+  interestedCount: number;
+  equipment: string;
+  ratingOfWeather: number;
+  date: string;
+  time: string;
+
+}
+
+export type Place = {
+  id: number;
+  name: string;
+  lat: number;
+  lon: number;
+  rating: number;
+}
+
+export class GetMeetingsRoute extends Route {
   data: never;
   response: {
-    meetings: {
-      id: number;
-      title: string;
-      description: string;
-      date: string;
-      time: string;
-    }[]
+    meetings: Meeting[]
   }
   constructor() {
-    super()
-    this.type = ApiMethod.GET;
-    this.url = '/meetings';
-    this.isProtected = true;
+    super(ApiMethod.GET, '/meetings', true);
+    this.response = {meetings: []}
   }
 }
+

@@ -7,9 +7,19 @@
         layer-type="base"
         name="Stadia Maps Basemap"
       ></l-tile-layer>
-      <!-- Znacznik dla Warszawy -->
-      <l-marker :lat-lng="[52.2298, 21.0118]">
-        <l-popup>Warszawa</l-popup>
+      <!-- Dynamiczne markery na mapie -->
+      <l-marker
+          v-for="meeting in meetings"
+          :key="meeting.id"
+          :lat-lng="[meeting.lat, meeting.lon]"
+      >
+        <template #popup>
+          <div>
+            <h3>{{ meeting.title }}</h3>
+            <p>{{ meeting.description }}</p>
+            <p><strong>Data:</strong> {{ meeting.date }} {{ meeting.time }}</p>
+          </div>
+        </template>
       </l-marker>
     </l-map>
   </div>
@@ -32,11 +42,31 @@
 <script lang="ts" setup>
 import "leaflet/dist/leaflet.css"
 import {LMap, LMarker, LPopup, LTileLayer} from "@vue-leaflet/vue-leaflet"
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
+import {apiCall} from "@/api.ts";
+import {GetMeetingsRoute} from "@/apiRoutes.ts";
+import type {Meeting} from "@/apiRoutes.ts";
 
 const zoom = ref(6)
 const center = ref([52.2298, 21.0118])
+const meetings = ref<Meeting[]>([]);
 
+// Funkcja do pobrania danych spotkań
+const fetchMeetings = async () => {
+  try {
+    const route = new GetMeetingsRoute(); // Tworzymy obiekt klasy Route
+    const response = await apiCall(route, {}); // Wywołujemy apiCall
+    meetings.value = response.meetings; // Zapisujemy odpowiedź do stanu
+    console.log('Meetings data:', meetings.value);
+  } catch (error) {
+    console.error('Błąd pobierania spotkań:', error);
+  }
+};
+
+// Pobierz dane przy montowaniu komponentu
+onMounted(() => {
+  fetchMeetings();
+});
 
 // Lista lokalizacji
 const locations = [
