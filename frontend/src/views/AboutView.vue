@@ -26,8 +26,8 @@ main{
 }
 
 .wrapper{
-  height: 300px;
-  width: 300px;
+  height: 500px;
+  width: 100vw;
 }
 
 </style>
