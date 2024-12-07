@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 import { Length, IsEmail } from 'class-validator';
+import { Equipment } from './Equipment';
 
 @Entity()
 export class User {
@@ -16,4 +17,7 @@ export class User {
 
     @Column({ nullable: true })
     token: string | null;
+
+    @OneToMany(()=>Equipment, (equipment)=>equipment.user)
+    equipment: Equipment[];
 }

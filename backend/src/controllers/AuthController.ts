@@ -5,6 +5,7 @@ import {User} from '../entity/User';
 import {generateToken} from '../utils/jwt';
 
 export class AuthController {
+
     static register = async (req: Request, res: Response) => {
         const { email, password } = req.body;
         const userRepository = AppDataSource.getRepository(User);

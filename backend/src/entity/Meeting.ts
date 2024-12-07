@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { Length} from 'class-validator';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, ManyToOne } from 'typeorm';
+import { Length } from 'class-validator';
+import { Equipment } from './Equipment';
+import { Place } from './Place';
 
 @Entity()
 export class Meeting {
@@ -7,13 +9,16 @@ export class Meeting {
     id: number;
 
     @Column()
-    idPlace: number; // place is wanted
+    name: string;
+
+    @ManyToOne(()=>Place, (place)=>place.meetings)
+    place: Place;
 
     @Column()
     countInterested: number;
 
-    @Column()
-    idEquipment: number[]; // array of string is wanted
+    @ManyToMany(()=>Equipment)
+    equipment: Equipment[];
 
     @Column()
     date: string;
