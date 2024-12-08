@@ -26,18 +26,20 @@ export type Meeting = {
   id: number;
   place: Place;
   name: string;
-  description: string;
+  desc: string;
   interestedCount: number;
   equipment: Equipment[];
   ratingOfWeather: number;
   date: string;
+  lat: number;
+  lon: number;
 }
 
 export type Place = {
   id: number;
   name: string;
-  lat: number;
-  lon: number;
+  latitude: number;
+  longitude: number;
   rating: number;
 }
 
@@ -69,23 +71,33 @@ export class GetMeetingsRoute extends Route {
   }
 }
 
+export class AddPlaceRoute extends Route {
+  data: {
+    place: Place
+  }
+  response: never;
+  constructor() {
+    super(ApiMethod.POST, '/place-create', true);
+  }
+}
+
 export class AddMeetingRoute extends Route {
   data: {
     meeting: Meeting
   }
   response: never;
   constructor() {
-    super(ApiMethod.POST, '/meetings/add', true);
+    super(ApiMethod.POST, '/meeting-create', true);
   }
 }
 
-export class GetEquipment extends Route {
+export class GetEquipmentRoute extends Route {
   data: never;
   response: {
     equipment: Equipment[]
   }
   constructor() {
-    super(ApiMethod.GET, '/equipment', true);
+    super(ApiMethod.GET, '/user/equipment', true);
   }
 }
 

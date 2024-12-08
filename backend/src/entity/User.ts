@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Length, IsEmail } from 'class-validator';
-import { Equipment } from './Equipment';
+import {Equipment} from "./Equipment";
 
 @Entity()
 export class User {
@@ -18,6 +18,6 @@ export class User {
     @Column({ nullable: true })
     token: string | null;
 
-    @OneToMany(()=>Equipment, (equipment)=>equipment.user)
+    @OneToMany(()=>Equipment, (equipment)=>equipment.user, {cascade: ['insert', 'update']})
     equipment: Equipment[];
 }

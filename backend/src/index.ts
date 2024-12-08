@@ -5,6 +5,9 @@ import { DataSource } from 'typeorm';
 import router from './routes';
 import { User } from './entity/User';
 import cors from 'cors';
+import {Meeting} from "./entity/Meeting";
+import {Equipment} from "./entity/Equipment";
+import {Place} from "./entity/Place";
 
 dotenv.config();
 
@@ -16,7 +19,7 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     synchronize: true,
-    entities: [User],
+    entities: [User, Meeting, Place, Equipment],
 });
 
 AppDataSource.initialize()

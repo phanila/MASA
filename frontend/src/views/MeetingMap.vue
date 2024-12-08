@@ -11,7 +11,7 @@
       <l-marker
           v-for="meeting in meetings"
           :key="meeting.id"
-          :lat-lng="[meeting.place.lat, meeting.place.lon]"
+          :lat-lng="[meeting.place.longitude, meeting.place.latitude]"
       >
         <template #tooltip>
           <span>miejsce: {{meeting.place}}</span>
@@ -62,6 +62,7 @@ const fetchMeetings = async () => {
   try {
     const route = new GetMeetingsRoute(); // Tworzymy obiekt klasy Route
     const response = await apiCall(route, {}); // Wywołujemy apiCall
+    console.log(response.meetings)
     meetings.value = response.meetings; // Zapisujemy odpowiedź do stanu
     console.log('Meetings data:', meetings.value);
   } catch (error) {
