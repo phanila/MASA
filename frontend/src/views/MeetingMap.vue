@@ -20,7 +20,7 @@
         <template #popup>
           <div>
             <h3>{{ meeting.place }}</h3>
-            <p><strong>kiedy? {{meeting.date }}, godzina {{meeting.time}}</strong>></p>
+            <p><strong>kiedy? {{meeting.date }}}</strong>></p>
             <p>zainteresowani: {{meeting.interestedCount}}</p>
             <p>sprzęt: {{meeting.equipment}}</p>
             <p>warunki do obserwacji: {{meeting.ratingOfWeather}}</p>
