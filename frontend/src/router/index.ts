@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import TelescopeMap from "@/views/TelescopeMap.vue";
 import ExampleView from '@/views/ExampleView.vue'
 import LoginView from '@/views/User/LoginView.vue'
+import RegisterView from '@/views/User/RegisterView.vue'
+import AddMeetingView from '@/views/Meetings/AddMeetingView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,6 +13,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+    },
+    {
+      path: '/meeting/add',
+      name: 'meeting-add',
+      component: AddMeetingView,
     },
     {
       path: '/about',
@@ -38,7 +45,7 @@ const router = createRouter({
     {
       path: '/register',
       name: 'register',
-      component: () => import('@/views/User/RegisterView.vue')
+      component: RegisterView
     }
   ],
 })

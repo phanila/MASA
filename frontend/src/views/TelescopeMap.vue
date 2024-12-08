@@ -47,7 +47,7 @@
 
 <script lang="ts" setup>
 import "leaflet/dist/leaflet.css"
-import {LMap, LMarker, LPopup, LTileLayer} from "@vue-leaflet/vue-leaflet"
+import {LMap, LMarker, LTileLayer} from "@vue-leaflet/vue-leaflet"
 import {onMounted, ref} from 'vue'
 import {apiCall} from "@/api.ts";
 import {GetMeetingsRoute} from "@/apiRoutes.ts";

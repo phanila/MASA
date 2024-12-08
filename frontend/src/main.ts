@@ -11,7 +11,7 @@ import 'vuetify/dist/vuetify.min.css'
 
 const app = createApp(App)
 const vuetify = createVuetify({
-  components, directives
+  components, directives,
 })
 
 app.use(createPinia())
