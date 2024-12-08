@@ -38,8 +38,8 @@ export type Meeting = {
 export type Place = {
   id: number;
   name: string;
-  lat: number;
-  lon: number;
+  latitude: number;
+  longitude: number;
   rating: number;
 }
 
