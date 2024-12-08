@@ -28,7 +28,4 @@ export class Meeting {
 
     @Column()
     time: string;
-
-    @Column()
-    ratingOfWeather: number;
 }
