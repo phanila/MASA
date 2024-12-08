@@ -37,15 +37,18 @@
         >
           Add Meeting
         </v-btn>
+        <v-combobox :items="possibleEquipment" multiple v-model="meeting.equipment">
+
+        </v-combobox>
       </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet'
-import { AddMeetingRoute, type Meeting } from '@/apiRoutes.ts'
+import { AddMeetingRoute, type Equipment, type Meeting } from '@/apiRoutes.ts'
 import { apiCall } from '@/api.ts'
 
 const meeting = ref<Meeting>({
@@ -60,6 +63,7 @@ const meeting = ref<Meeting>({
 const zoom = ref(6)
 const center = ref([52.2298, 21.0118])
 const marker = ref<[number, number] | null>(null)
+const possibleEquipment = ref<Equipment[]>([])
 
 const onClick = (evt) => {
   const { lat, lng } = evt.latlng
@@ -77,8 +81,11 @@ const addMeeting = async () => {
   }catch (error){
     console.error('Error adding meeting:', error);
   }
-
 }
+onMounted(async () => {
+  possibleEquipment.value = await apiCall(new GetEquipmentRoute(), {});
+  console.log(possibleEquipment)
+})
 </script>
 
 <style scoped>
