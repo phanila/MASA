@@ -46,9 +46,11 @@ export class MeetController {
         const meetingRepository = AppDataSource.getRepository(Meeting);
 
         try {
-            const Meetings = await meetingRepository.find();
+            const Meetings = await meetingRepository.find({
+                relations: ['place']
+            });
 
-            res.json({ Meetings });
+            res.json({ meetings: Meetings });
         } catch (error) {
             res.status(500).json({ message: 'Internal server error' });
         }
