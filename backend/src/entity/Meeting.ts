@@ -14,7 +14,7 @@ export class Meeting {
     @Column()
     desc: string;
 
-    @ManyToOne(()=>Place, (place)=>place.meetings)
+    @ManyToOne(()=>Place, (place)=>place.meetings, {cascade: ['insert', 'update']})
     place: Place;
 
     @Column()
@@ -25,7 +25,4 @@ export class Meeting {
 
     @Column()
     date: string;
-
-    @Column()
-    time: string;
 }

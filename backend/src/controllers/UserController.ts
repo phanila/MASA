@@ -15,7 +15,7 @@ export class UserController {
             await  equipmentRepository.save(equipment)
 
 
-            res.status(201).json({ message: 'add equipment' });;
+            res.status(201).json({ message: 'add equipment' });
         } catch (error) {
             res.status(500).json({ message: 'Internal server error' });
         }

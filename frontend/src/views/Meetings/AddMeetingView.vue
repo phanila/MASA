@@ -21,7 +21,7 @@
           outlined
         ></v-text-field>
         <v-text-field
-          v-model="meeting.description"
+          v-model="meeting.desc"
           label="Description"
           outlined
         ></v-text-field>
@@ -48,17 +48,15 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet'
-import { AddMeetingRoute, type Equipment, type Meeting } from '@/apiRoutes.ts'
+import { AddMeetingRoute, GetEquipmentRoute,type Equipment, type Meeting } from '@/apiRoutes.ts'
 import { apiCall } from '@/api.ts'
 
 const meeting = ref<Meeting>({
   name: '',
-  description: '',
+  desc: '',
   date: '',
-  place: {
-    lat: 0,
-    lon: 0,
-  },
+  lat: 0,
+  lon: 0,
 })
 const zoom = ref(6)
 const center = ref([52.2298, 21.0118])
@@ -72,10 +70,8 @@ const onClick = (evt) => {
 }
 
 const addMeeting = async () => {
-  meeting.value.place = {
-    lat: marker.value[0],
-    lon: marker.value[1],
-  }
+  meeting.value.lon = marker.value[0];
+  meeting.value.lat = marker.value[1];
   try{
     await apiCall(new AddMeetingRoute(), { meeting: meeting.value });
   }catch (error){
@@ -83,8 +79,8 @@ const addMeeting = async () => {
   }
 }
 onMounted(async () => {
-  possibleEquipment.value = await apiCall(new GetEquipmentRoute(), {});
-  console.log(possibleEquipment)
+  const response = await apiCall(new GetEquipmentRoute(), {});
+  possibleEquipment.value = response.equipment;
 })
 </script>
 
