@@ -5,6 +5,17 @@ import { Place } from '../entity/Place';
 
 
 export class PlaceController {
+    static getPlaces= async (req: Request, res: Response) => {
+        const placeRepository = AppDataSource.getRepository(Place);
+
+        try {
+            const places = await placeRepository.find();
+
+            res.json({ places });
+        } catch (error) {
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    };
 
     static create = async (req: Request, res: Response) => {
         const { name, latitude, longitude } = req.body;
