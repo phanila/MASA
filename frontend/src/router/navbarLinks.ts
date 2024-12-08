@@ -8,5 +8,6 @@ export const navbarLinks: [NavbarLink] = [
   { title: "Login", path: "/login" },
   { title: "Register", path: "/register" },
   { title: "Telescope Map", path: "/map" },
-  { title: "Add Meeting", path: "/meeting/add" }
+  { title: "Add Meeting", path: "/meeting/add" },
+  {title: "Places", path: "/place-create"}
 ];
