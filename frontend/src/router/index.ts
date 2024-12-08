@@ -6,6 +6,7 @@ import LoginView from '@/views/User/LoginView.vue'
 import RegisterView from '@/views/User/RegisterView.vue'
 import AddMeetingView from '@/views/Meetings/AddMeetingView.vue'
 import Places from '@/views/Places.vue'
+import UserView from '@/views/User/UserView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,12 @@ const router = createRouter({
       path: '/meeting/add',
       name: 'meeting-add',
       component: AddMeetingView,
+    },
+
+    {
+      path: '/user/equipment/add',
+      name: 'equipment-add',
+      component: UserView,
     },
     {
       path: '/about',
@@ -52,6 +59,10 @@ const router = createRouter({
       path: '/place',
       name: 'place-create',
       component: Places
+    },{
+      path: '/user',
+      name: 'user',
+      component: UserView
     }
   ],
 })
