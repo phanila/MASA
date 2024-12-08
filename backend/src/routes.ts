@@ -19,6 +19,7 @@ router.post('/meeting-create', authMiddleware, MeetController.create);
 router.post('/meeting-join', authMiddleware, MeetController.join);
 
 router.get('/places', authMiddleware, PlaceController.getPlaces);
+router.get('/weather', authMiddleware, WeatherController.getWeather);
 router.post('/place-create', authMiddleware, PlaceController.create);
 router.patch('/place-rate', authMiddleware, PlaceController.ratePlace);
 
