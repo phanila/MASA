@@ -62,6 +62,7 @@ const fetchMeetings = async () => {
   try {
     const route = new GetMeetingsRoute(); // Tworzymy obiekt klasy Route
     const response = await apiCall(route, {}); // Wywołujemy apiCall
+    console.log(response)
     meetings.value = response.meetings; // Zapisujemy odpowiedź do stanu
     console.log('Meetings data:', meetings.value);
   } catch (error) {

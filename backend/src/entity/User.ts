@@ -18,6 +18,6 @@ export class User {
     @Column({ nullable: true })
     token: string | null;
 
-    @OneToMany(()=>Equipment, (equipment)=>equipment.user)
+    @OneToMany(()=>Equipment, (equipment)=>equipment.user, {cascade: ['insert', 'update']})
     equipment: Equipment[];
 }

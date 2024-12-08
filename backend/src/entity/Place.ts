@@ -11,10 +11,10 @@ export class Place {
     @Length(6, 20)
     name: string;
 
-    @Column()
+    @Column({type: "float"})
     latitude: number;
 
-    @Column()
+    @Column({type: "float"})
     longitude: number;
 
     @Column()
