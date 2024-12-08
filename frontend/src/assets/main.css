@@ -1,31 +1,92 @@
 @import './base.css';
 
-#app {
-  width: 100%;
+/* General Styles */
+body {
+  background: url('./images/space.jpg') no-repeat center center fixed; /* Space-themed background */
+  background-size: cover; /* Ensure the background image covers the screen */
+  color: #1b3b5e; /* Light, glowing text for readability */
+  font-family: 'Roboto', sans-serif; /* Modern, clean font */
   margin: 0;
   padding: 0;
-  font-weight: normal;
 }
 
-a,
-.green {
+#app {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 300; /* Light font weight for elegance */
+}
+
+/* Navigation Bar */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgba(10, 30, 51, 0.9); /* Semi-transparent dark blue */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Subtle shadow */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav a {
+  color: #61dafb; /* Glowing light blue */
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s, transform 0.3s;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+nav a:hover {
+  color: #1b3b5e; /* Bright white on hover */
+  transform: scale(1.1); /* Slight zoom on hover */
 }
 
-@media (min-width: 1024px) {
-  body {
-  }
+/* Hero Section */
+.hero {
+  padding: 5rem 1rem;
+  text-align: center;
+}
 
-  #app {
-    padding: 0;
-  }
+.hero h1 {
+  color: #1b3b5e;
+  font-size: 3rem;
+  text-shadow: 0 0 10px #61dafb, 0 0 20px #61dafb; /* Glowing effect */
+}
+
+.hero p {
+  color: #1b3b5e;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(90deg, #61dafb, #1b3b5e);
+  color: #1b3b5e;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.4s, transform 0.3s;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #1b3b5e, #61dafb);
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(10, 30, 51, 0.9); /* Same as navbar */
+  color: #1b3b5e;
+  font-size: 0.9rem;
 }

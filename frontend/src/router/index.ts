@@ -5,6 +5,7 @@ import ExampleView from '@/views/ExampleView.vue'
 import LoginView from '@/views/User/LoginView.vue'
 import RegisterView from '@/views/User/RegisterView.vue'
 import AddMeetingView from '@/views/Meetings/AddMeetingView.vue'
+import Places from '@/views/Places.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,6 +47,11 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterView
+    },
+    {
+      path: '/place',
+      name: 'place-create',
+      component: Places
     }
   ],
 })

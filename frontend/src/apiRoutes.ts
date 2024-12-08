@@ -69,6 +69,16 @@ export class GetMeetingsRoute extends Route {
   }
 }
 
+export class AddPlaceRoute extends Route {
+  data: {
+    place: Place
+  }
+  response: never;
+  constructor() {
+    super(ApiMethod.POST, '/place-create', true);
+  }
+}
+
 export class AddMeetingRoute extends Route {
   data: {
     meeting: Meeting
