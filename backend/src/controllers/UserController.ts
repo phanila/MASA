@@ -14,6 +14,9 @@ export class UserController {
             const equipment = equipmentRepository.create(name);
 
             user.equipment = [...user.equipment, ...equipment];
+
+            await userRepository.save(user);
+
             res.json({ equipment: user.equipment });
         } catch (error) {
             res.status(500).json({ message: 'Internal server error' });

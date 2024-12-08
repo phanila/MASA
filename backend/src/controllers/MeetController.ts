@@ -25,8 +25,11 @@ export class MeetController {
 
         try {
             const meeting = await meetRepository.findOne({where: {id:meetingId}});
-
+            meeting.countInterested++;
             meeting.equipment = [...meeting.equipment, ...equipment];
+
+            await meetRepository.save(meeting);
+
             res.status(201).json({ message: 'Meeting joined' });
         } catch (error) {
             res.status(500).json({ message: 'Internal server error' });
