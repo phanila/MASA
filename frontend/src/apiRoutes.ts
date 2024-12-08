@@ -14,13 +14,21 @@ export abstract class Route {
   }
 }
 
+export type User = {
+  id: number;
+  email: string;
+  password: string;
+  token: string | null;
+  equipment: Equipment[]
+}
+
 export type Meeting = {
   id: number;
   place: Place;
   name: string;
   description: string;
   interestedCount: number;
-  equipment: string;
+  equipment: Equipment[];
   ratingOfWeather: number;
   date: string;
 }
@@ -31,6 +39,12 @@ export type Place = {
   lat: number;
   lon: number;
   rating: number;
+}
+
+export type Equipment = {
+  id: number;
+  name: string;
+  user: User
 }
 
 export type Weather = {
@@ -65,3 +79,44 @@ export class AddMeetingRoute extends Route {
   }
 }
 
+export class GetEquipment extends Route {
+  data: never;
+  response: {
+    equipment: Equipment[]
+  }
+  constructor() {
+    super(ApiMethod.GET, '/equipment', true);
+  }
+}
+
+export class LoginRoute extends Route{
+  data: {
+    username: string;
+    password: string;
+  }
+  response: {
+    token: string;
+  }
+  constructor() {
+    super()
+    this.type = ApiMethod.POST;
+    this.url = '/login';
+    this.isProtected = false;
+  }
+}
+
+export class RegisterRoute extends Route{
+  data: {
+    username: string;
+    password: string;
+  }
+  response: {
+    token: string;
+  }
+  constructor() {
+    super();
+    this.type = ApiMethod.POST;
+    this.url = '/register';
+    this.isProtected = false;
+  }
+}

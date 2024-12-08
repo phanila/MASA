@@ -28,13 +28,19 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { apiCall } from '@/api.ts'
+import { LoginRoute } from '@/apiRoutes.ts'
 
 const email = ref('')
 const password = ref('')
 
-const login = () => {
-  console.log('Email:', email.value)
-  console.log('Password:', password.value)
+const login = async () => {
+  try{
+    const response = await apiCall(new LoginRoute(), { email: email.value, password: password.value });
+    localStorage.setItem('token', response.token);
+  }catch(e){
+    console.error('Login failed:', e);
+  }
 }
 </script>
 

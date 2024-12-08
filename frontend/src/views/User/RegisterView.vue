@@ -40,6 +40,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { RegisterRoute } from '@/apiRoutes.ts'
+import { apiCall } from '@/api.ts'
 
 const email = ref('')
 const password = ref('')
@@ -69,13 +71,18 @@ const getPasswordStrengthColor = (strength: number) => {
   return 'green'
 }
 
-const register = () => {
+const register = async () => {
   if (password.value !== repeatPassword.value) {
     alert('Passwords do not match')
     return
   }
-  console.log('Email:', email.value)
-  console.log('Password:', password.value)
+  try{
+    const response = await apiCall(new RegisterRoute(), { email: email.value, password: password.value, repeatPassword: password.value})
+    console.log('Register response:', response)
+  }
+  catch (e) {
+    console.error('Register failed:', e)
+  }
 }
 </script>
 
