@@ -11,6 +11,8 @@ export class MeetController {
 
         try {
             const place = await placeRepository.findOne({where: {latitude: lat, longitude: long}});
+            if(!place){ const place = placeRepository.create({ name:"Not known", latitude: lat, longitude:long });
+                await placeRepository.save(place);}
             const meeting = meetRepository.create({ name, desc, countInterested: 1, place, equipment, date, time });
             await meetRepository.save(meeting);
 
