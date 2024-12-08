@@ -2,6 +2,7 @@ import {Request, Response} from 'express';
 import {AppDataSource} from '../index';
 import { Meeting } from '../entity/Meeting';
 import { Place } from '../entity/Place';
+import { WeatherController } from './WeatherController';
 
 export class MeetController {
     static create = async (req: Request, res: Response) => {
@@ -27,7 +28,7 @@ export class MeetController {
         }
     };
     static join= async (req: Request, res: Response) => {
-        const { userId, meetingId, equipment } = req.body;
+        const { meetingId, equipment } = req.body;
         const meetRepository = AppDataSource.getRepository(Meeting);
 
         try {
@@ -50,7 +51,25 @@ export class MeetController {
                 relations: ['place']
             });
 
-            res.json({ meetings: Meetings });
+            let meetings = Meetings.map(async (meeting) => {
+                return {
+                    id: meeting.id,
+                    name: meeting.name,
+                    desc: meeting.desc,
+                    countInterested: meeting.countInterested,
+                    place: {
+                        id: meeting.place.id,
+                        name: meeting.place.name,
+                        latitude: meeting.place.latitude,
+                        longitude: meeting.place.longitude,
+                        rating: (await WeatherController.getWeather(meeting.place.latitude, meeting.place.longitude)).magnitude
+                    },
+                    equipment: meeting.equipment,
+                    date: meeting.date
+                }
+            })
+
+            res.json({ meetings: meetings });
         } catch (error) {
             res.status(500).json({ message: 'Internal server error' });
         }

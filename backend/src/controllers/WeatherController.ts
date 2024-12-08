@@ -19,12 +19,9 @@ async function fetchHTML(url) {
 fetchHTML("https://example.com");
 
 
-export class UserController {
+export class WeatherController {
 
-    static getWeather = async (req: Request, res: Response) => {
-        const {lat} = req.lat;
-        const {lon} = req.lon;
-
+    static getWeather = async (lat:number, lon:number) => {
         type Weather = {
             clouds: number;
             visibility: number;
@@ -76,6 +73,7 @@ export class UserController {
 
 
         }
+
     }
 
 }
