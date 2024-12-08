@@ -11,5 +11,6 @@ export const navbarLinks: [NavbarLink] = [
   { title: "Add Meeting", path: "/meeting/add" },
   { title: "Telescope Map", path: "/map" },
   { title: "Add Meeting", path: "/meeting/add" },
-  {title: "Places", path: "/place-create"}
+  {title: "Places", path: "/place-create"},
+  {title: "User", path: "/user"}
 ];

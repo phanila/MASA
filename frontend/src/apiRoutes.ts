@@ -1,4 +1,4 @@
-import { ApiMethod } from '@/api'
+import { ApiMethod } from '@/api.ts'
 
 export abstract class Route {
   type: ApiMethod;
@@ -130,5 +130,20 @@ export class RegisterRoute extends Route{
     this.type = ApiMethod.POST;
     this.url = '/register';
     this.isProtected = false;
+  }
+}
+
+export class AddEquipmentRoute extends Route{
+  data: {
+    name: string;
+  }
+  response: {
+    token: string;
+  }
+  constructor() {
+    super();
+    this.type = ApiMethod.POST;
+    this.url = '/user/equipment/add';
+    this.isProtected = true;
   }
 }
