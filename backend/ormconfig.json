@@ -1,0 +1,11 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "szymon",
+  "password": "weronika",
+  "database": "masa",
+  "entities": ["src/entity/**/*.ts", "/src/entity/Equipment.ts"],
+  "synchronize": true,
+  "autoLoadEntities": true
+}
